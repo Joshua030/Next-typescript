@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { SimplePokemon } from "../_types/pokemonTypes";
+import { SimplePokemon } from "@/app/_types/pokemonTypes";
 import { PokemonCard } from "./PokemonCard";
 
 interface PokemonGridProps {
