@@ -1,23 +1,37 @@
 import prisma from "@/lib/prisma";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
+import bcrypt from "bcryptjs";
 
 export async function GET(request: Request) {
-  await prisma.todo.deleteMany();
+  await prisma.todo.deleteMany(); // delete * from todo
+  await prisma.user.deleteMany(); // delete * from todo
 
-  await prisma.todo.createMany({
-    data: [
-      { description: "Learn TypeScript", complete: true },
-      { description: "Build a React app" },
-      { description: "Set up Prisma database" },
-      { description: "Create API routes" },
-      { description: "Deploy to production" },
-    ],
+  const user = await prisma.user.create({
+    data: {
+      email: "test1@google.com",
+      password: bcrypt.hashSync("123456"),
+      roles: ["admin", "client", "super-user"],
+      todos: {
+        create: [
+          { description: "Piedra del alma", complete: true },
+          { description: "Piedra del poder" },
+          { description: "Piedra del tiempo" },
+          { description: "Piedra del espacio" },
+          { description: "Piedra del realidad" },
+        ],
+      },
+    },
   });
 
-  return new NextResponse(
-    JSON.stringify({
-      message: "Seed created",
-    }),
-    { status: 200 }
-  );
+  // await prisma.todo.createMany({
+  //   data: [
+  //     { description: 'Piedra del alma', complete: true },
+  //     { description: 'Piedra del poder' },
+  //     { description: 'Piedra del tiempo' },
+  //     { description: 'Piedra del espacio' },
+  //     { description: 'Piedra del realidad' },
+  //   ]
+  // })
+
+  return NextResponse.json({ message: "Seed Executed" });
 }

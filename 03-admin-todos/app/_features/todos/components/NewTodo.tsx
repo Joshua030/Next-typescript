@@ -1,9 +1,11 @@
 "use client";
 
-import { IoTrashOutline } from "react-icons/io5";
-import * as todosApi from "../helpers/todos";
 import { FormEvent, useState } from "react";
+import { IoTrashOutline } from "react-icons/io5";
+
 import { useRouter } from "next/navigation";
+import * as todosApi from "../helpers/todos";
+import { deleteCompleted } from "../actions/todo-actions";
 
 export const NewTodo = () => {
   const router = useRouter();
@@ -13,15 +15,17 @@ export const NewTodo = () => {
     e.preventDefault();
     if (description.trim().length === 0) return;
 
+    // await createTodo(description, user.id);
     await todosApi.createTodo(description);
-    setDescription("");
     router.refresh();
+
+    setDescription("");
   };
 
-  const deleteCompleted = async () => {
-    await todosApi.deleteCompletedTodos();
-    router.refresh();
-  };
+  // const deleteCompleted = async() => {
+  //   await todosApi.deleteCompletedTodos();
+  //   // router.refresh();
+  // }
 
   return (
     <form onSubmit={onSubmit} className="flex w-full">

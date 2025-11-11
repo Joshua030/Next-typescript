@@ -1,3 +1,7 @@
+
+# env
+NEXTAUTH_SECRET can be generate in this [url](https://generate-secret.vercel.app/32)
+
 # Development
 Steps to up the up in development
 
@@ -6,7 +10,7 @@ Steps to up the up in development
 docker compose up -d
 ```
 
-2. Rename the ,env.example a .env
+2. Rename the .env.example a .env
 3. Replace the  environment variables
 4. Ejecutar el comando ```npm install ```
 5. Ejecutar el comando ``` npm run dev ```
@@ -25,7 +29,9 @@ npx prisma migrate dev
 npx prisma generate
 
 ```
-
+## Nota
+usuario: test1@google.com
+password: 123456
 
 
 # Prod

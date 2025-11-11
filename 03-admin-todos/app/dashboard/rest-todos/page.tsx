@@ -1,3 +1,4 @@
+export const dynamic = "auto";
 import { NewTodo, TodosGrid } from "@/app/_features/todos";
 import prisma from "@/lib/prisma";
 import { type Metadata } from "next";
